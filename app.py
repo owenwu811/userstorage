@@ -125,6 +125,8 @@ if __name__ == '__main__':
 
 #email feature not working 
 #after making email feature work, write unittest for it
+#add some kind of testing automation tool that can automatically login to a browser and simulate human interactions like selenium
+# YOU MUST USE SELENIUM TO TEST LOGGING IN OR REGISTERING OR LOGGING OUT BECAUSE UNIT TESTS DO NOT CONSIDER EXTERNAL DEPENDENCIES LIKE DATABASES!!!!!
 
 #already did:
 #1. login + logout + register feature + database integration
