@@ -1,7 +1,7 @@
 import jwt
 from datetime import datetime, timedelta
 
-SECRET_KEY = "your-secret-key"  # Consider using a stronger key
+SECRET_KEY = "."  # Consider using a stronger key
 
 def generate_reset_token(email):
     payload = {
