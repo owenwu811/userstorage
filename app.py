@@ -90,3 +90,7 @@ if __name__ == '__main__':
 #bug fix solution for testlogin.py overriding database;
 # export MY_APP_ENV=test; python3 testlogin.py; flask run - a won't be able to login
 # unset MY_APP_ENV; flask run - a will still be able to login
+
+
+
+#chmod +x /Users/owenwu/trial/.git/hooks/pre-push
