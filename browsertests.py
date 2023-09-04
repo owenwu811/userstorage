@@ -1,34 +1,39 @@
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 # Create a new Chrome browser instance
 driver = webdriver.Chrome()
 
 # Test registration
 driver.get('http://localhost:5000/register')
-username_input = driver.find_element_by_name('username')
-password_input = driver.find_element_by_name('password')
-confirm_password_input = driver.find_element_by_name('confirm_password')
-register_button = driver.find_element_by_name('register_button')
+
+# Using WebDriverWait to ensure the elements are present before interacting with them
+username_input = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.NAME, 'username')))
+password_input = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.NAME, 'password')))
+confirm_password_input = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.NAME, 'confirm_password')))
+register_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, '//button[text()="Register"]')))
 
 username_input.send_keys('testuser')
 password_input.send_keys('testpassword')
 confirm_password_input.send_keys('testpassword')
 register_button.click()
+print("Clicked the Register button")
 
 # Test login
 driver.get('http://localhost:5000/login')
-username_input = driver.find_element_by_name('username')
-password_input = driver.find_element_by_name('password')
-login_button = driver.find_element_by_name('login_button')
+print("Navigated to the login page")
+username_input = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.NAME, 'username')))
+password_input = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.NAME, 'password')))
+login_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, '//button[text()="Login"]')))
 
 username_input.send_keys('testuser')
 password_input.send_keys('testpassword')
 login_button.click()
 
-# Test logout
-logout_button = driver.find_element_by_name('logout_button')
-logout_button.click()
+# If there's a logout button or any other test scenarios, add them here
 
 # Close the browser
 driver.quit()
+

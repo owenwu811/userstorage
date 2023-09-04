@@ -24,7 +24,6 @@ app.config['MAIL_USE_SSL'] = False
 
 mail = Mail(app)
 
-
 app.secret_key =  '.'
 db.init_app(app)
 
@@ -123,8 +122,11 @@ with app.app_context():
 if __name__ == '__main__':
     app.run(debug=True)
 
+#goal:
+#create an app, get good amount of downloads and 4-5 stars review? Sounds very positive
+
 #email feature not working 
-#after making email feature work, write unittest for it
+#after making email feature work, write unittest for each route - forgot_password, reset_password, send_reset_email, etc
 #add some kind of testing automation tool that can automatically login to a browser and simulate human interactions like selenium
 # YOU MUST USE SELENIUM TO TEST LOGGING IN OR REGISTERING OR LOGGING OUT BECAUSE UNIT TESTS DO NOT CONSIDER EXTERNAL DEPENDENCIES LIKE DATABASES!!!!!
 
