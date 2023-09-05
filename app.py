@@ -15,8 +15,8 @@ if environment == 'test':
 else:
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///user_credentials.db'
 
-app.config['MAIL_SERVER'], app.config['MAIL_PORT'], app.config['MAIL_USERNAME'] = 'smtp.mail.yahoo.com', 587, 'wuowen681@yahoo.com'
-app.config['MAIL_PASSWORD'], app.config['MAIL_USE_TLS'], app.config['MAIL_USE_SSL'] = 'Holo-light1234!', True, False
+app.config['MAIL_SERVER'], app.config['MAIL_PORT'], app.config['MAIL_USERNAME'] = '', 587, ''
+app.config['MAIL_PASSWORD'], app.config['MAIL_USE_TLS'], app.config['MAIL_USE_SSL'] = '', True, False
 
 mail = Mail(app)
 
