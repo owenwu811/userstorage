@@ -34,4 +34,4 @@ h11==0.14.0
 httplib2==0.22.0
 httpretty==1.1.4
 idna==3.4
-importlib-metadata==
+importlib-metadata>=3.6.0

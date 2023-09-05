@@ -1,12 +1,17 @@
 import unittest
 from db import db, User
 from datetime import datetime, timedelta
+from app import app
 
 # ... [rest of your code]
 
 class AuthTestCase(unittest.TestCase):
 
     # ... [rest of your methods]
+    def setUp(self):
+        # Set up the test client
+        self.client = app.test_client()
+        app.config['TESTING'] = True
 
     def test_account_lockout_after_multiple_incorrect_attempts(self):
         self.register('testuser', 'testpassword', 'testpassword')
@@ -34,5 +39,19 @@ class AuthTestCase(unittest.TestCase):
         # Now, attempt to login with correct credentials
         response = self.login('testuser', 'testpassword')
         self.assertIn(b'Welcome to Our Website, testuser!', response.data)
+    def register(self, username, password, confirm_password):
+        # Your registration logic here. For example:
+        return self.client.post('/register', data=dict(
+            username=username, password=password, confirm_password=confirm_password
+        ), follow_redirects=True)
+
+    def login(self, username, password):
+        # Your login logic here. For example:
+        return self.client.post('/login', data=dict(
+            username=username, password=password
+        ), follow_redirects=True)
 
     # ... [rest of your methods]
+
+    if __name__ == "__main__":
+        unittest.main()
