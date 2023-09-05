@@ -62,7 +62,7 @@ def login():
             db.session.commit()
             print("Data committed to DB.")
             if user.login_attempts >= 10:
-                return "Too many failed login attempts. Try again in 1 minutes."
+                return "Too many failed login attempts. Try again in 5 minutes."
         return 'Login failed'
     return render_template('login.html')
 
