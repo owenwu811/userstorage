@@ -3,7 +3,7 @@ from flask_mail import Mail, Message
 from flask_migrate import Migrate
 from token_utils import generate_reset_token, verify_reset_token
 from datetime import datetime, timedelta
-import os, smtplib
+import os, smtplib, socket
 smtplib.SMTP.debuglevel = 1
 
 app = Flask(__name__)
@@ -15,8 +15,8 @@ if environment == 'test':
 else:
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///user_credentials.db'
 
-app.config['MAIL_SERVER'], app.config['MAIL_PORT'], app.config['MAIL_USERNAME'] = '', 587, ''
-app.config['MAIL_PASSWORD'], app.config['MAIL_USE_TLS'], app.config['MAIL_USE_SSL'] = '', True, False
+app.config['MAIL_SERVER'], app.config['MAIL_PORT'], app.config['MAIL_USERNAME'] = 'smtp.yahoo.com', 587, 'wuowen681@yahoo.com'
+app.config['MAIL_PASSWORD'], app.config['MAIL_USE_TLS'], app.config['MAIL_USE_SSL'] = 'Holo-light1234!', True, False
 
 mail = Mail(app)
 
@@ -57,7 +57,7 @@ def login():
         elif user:
             user.login_attempts += 1
             print("Login attempts incremented:", user.login_attempts)
-            if user.login_attempts >= 10:
+            if user.login_attempts >= 10: #on the 11th try that the user gets wrong, it will lock the user out for 5 minutes
                 user.locked_until = datetime.utcnow() + timedelta(minutes=5)
             db.session.commit()
             print("Data committed to DB.")
@@ -159,13 +159,14 @@ with app.app_context():
 if __name__ == '__main__':
     app.run(debug=True)
 
-#PLEASE SETUP JENKINS ASAP SO THAT IT CAN AUTOMATE YOUR TESTS EVERYTIME YOU ADD A NEW FEATURE SO THAT YOU'RE NOT MANUALLY RUNNING EVERY TEST AND RISKING FORGETTING ONE
-#YOU ALSO NEED TO SETUP JENKINS SO THAT IT CAN RUN YOUR TESTS BEFORE MERGING INTO GITHUB
+#TO DO
 
-#goal:
-#create an app, get good amount of downloads and 4-5 stars review? Sounds very positive
+#make sure all your unit tests are actually accurate by testing them manually - not sure if test10triesout.py is actually correct because I change the range function to 5 and 15, and it still passes
+# after 5 minutes, it still says you're locked out - this works now!!!!!!!!!!! september 4th evening - I just tried it manually
+# the mail feature still dosen't work
 
-#email feature not working - error message says yahoo blocked the requests because too many wrong attempts
+#-----
+
 # make sure the flask app can handle many requests at once 
 #after making email feature work, write unittest for each route - forgot_password, reset_password, send_reset_email, etc
 #add some kind of testing automation tool that can automatically login to a browser and simulate human interactions like selenium
@@ -181,6 +182,7 @@ if __name__ == '__main__':
 # 5. managed to create a feature branch on git so that you can rollback changes in case new features break already existing features or unittests - very important
 # 6. managed to get selenium to automate the tests or user registration and login
 # 7. tried implementing the 10 tries locked out in 5 minute feature, and I created login_attempts and locked_until in db.py but had to apply a database migration for this to work and apply the changes from my code to the actual database itself
+# 8. was able to make 10 tries lockout feature work
 
 #5. fixed issue where testregistration unittest would fail after executing testlogin.py unit test first by generating unique data everytime the test is run so that you don't get already registered user by using unique_username = "testuser_" + str(uuid.uuid4()) - more in test_valid_registration function in testregistration.py
 

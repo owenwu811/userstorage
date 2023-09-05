@@ -6,6 +6,6 @@ python3 testroute.py
 python3 testlogin.py
 python3 test10triesout.py
 flask run
-python3seltest.py
+python3 seltest.py
 
 
