@@ -120,6 +120,7 @@ def reset_password(token):
             return redirect(url_for('reset_password', token=token))
         
         user.set_password(password)
+        db.session.flush()
         db.session.commit()  # Assuming you're using SQLAlchemy and have imported 'db'
         flash('Your password has been reset! Please login with your new password.', 'success')
         return redirect(url_for('login'))  # Assuming you have a route named 'login'
@@ -209,3 +210,5 @@ if __name__ == '__main__':
 
 #debugging experience: locking user out for 5 minutes after getting password wrong 10 times not working - print("Login attempts incremented:", user.login_attempts) after user.login_attempts += 1
 #possible reasons? login count not incrementing?
+#login route says "Login failed" more than 10 times without locking out the user
+#THE ISSUE WAS THAT YOU HAVE TO USE A CORRECT USERNAME AND INCORRECT PASSWORD TO TRIGGER LOGIN ATTEMPTS INCREMENTED BECAUSE ELIF BLOCK IS ELIF USER MEANING USER OR USERNAME IS STILL CORRECT
