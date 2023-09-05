@@ -62,7 +62,7 @@ def login():
             db.session.commit()
             print("Data committed to DB.")
             if user.login_attempts >= 10:
-                return "Too many failed login attempts. Try again in 5 minutes."
+                return "Too many failed login attempts. Try again in 1 minutes."
         return 'Login failed'
     return render_template('login.html')
 
@@ -167,6 +167,9 @@ if __name__ == '__main__':
 
 #-----
 
+#THE TEST10TRIESOUT.PY TEST NEVER PASSED - WHEN YOU EXECUTE PYTHON3 -M UNITTEST TEST10TRIESOUT.PY, it fails!!!!!
+
+#try to use python3 -m unittest filename.py instead of python3 filename.py
 # make sure the flask app can handle many requests at once 
 #after making email feature work, write unittest for each route - forgot_password, reset_password, send_reset_email, etc
 #add some kind of testing automation tool that can automatically login to a browser and simulate human interactions like selenium
@@ -183,6 +186,8 @@ if __name__ == '__main__':
 # 6. managed to get selenium to automate the tests or user registration and login
 # 7. tried implementing the 10 tries locked out in 5 minute feature, and I created login_attempts and locked_until in db.py but had to apply a database migration for this to work and apply the changes from my code to the actual database itself
 # 8. was able to make 10 tries lockout feature work
+# 9. verified that registration unit test was working by breaking it by changing self.assertin(b'Login') to self.assertin(b'adfsadf') and seeing if the test fails
+#10. verified that the registration unit test was working by changing the login credentials and seeing if that new credentials appeared under list_users route
 
 #5. fixed issue where testregistration unittest would fail after executing testlogin.py unit test first by generating unique data everytime the test is run so that you don't get already registered user by using unique_username = "testuser_" + str(uuid.uuid4()) - more in test_valid_registration function in testregistration.py
 
