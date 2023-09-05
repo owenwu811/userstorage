@@ -1,5 +1,6 @@
 #these tests are supposed to run everytime a new feature is added
 bash persistentlogintest.sh #good
+python3 -m unittest testroute.py #good
 python3 -m unittest testregistration.py #good
 python3 -m unittest testlogout.py #good 
 python3 -m unittest testlogin.py #good 
