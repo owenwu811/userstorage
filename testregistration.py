@@ -1,5 +1,4 @@
-import unittest
-import uuid  # Import the uuid library
+import unittest, uuid # Import the uuid library
 from app import app, db, User  # Adjust the imports as per your setup
 
 class AuthTestCase(unittest.TestCase):
