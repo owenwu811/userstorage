@@ -17,7 +17,7 @@ else:
 
 app.config['MAIL_SERVER'], app.config['MAIL_PORT'], app.config['MAIL_USERNAME'] = 'smtp.yahoo.com', 587, 'wuowen681@yahoo.com'
 app.config['MAIL_PASSWORD'], app.config['MAIL_USE_TLS'], app.config['MAIL_USE_SSL'] = 'Holo-light1234!', True, False
-
+#mail object
 mail = Mail(app)
 
 app.secret_key =  '.'
