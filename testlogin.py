@@ -27,8 +27,6 @@ class AuthTestCase(unittest.TestCase):
         response = self.login('testuser', 'testpassword')
         self.assertIn(b'Welcome to Our Website, testuser!', response.data)
 
-    # Other cleanup or tests ...
-
     def tearDown(self):
         with app.app_context():
             db.drop_all()
